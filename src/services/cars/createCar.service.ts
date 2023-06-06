@@ -1,7 +1,6 @@
-import { promises } from "dns";
 import AppDataSource from "../../data-source";
 import { Car } from "../../entities";
-import { ICar, ICarRequest } from "../../interfaces/cars/createCar.interface";
+import { ICarRequest } from "../../interfaces/cars/car.interface";
 import { carSchema } from "../../schemas/car.schema";
 
 const createCarService = async (data: ICarRequest) => {
