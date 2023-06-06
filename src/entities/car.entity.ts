@@ -1,51 +1,54 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 enum Fuels {
-  DIESEL = 'Diesel',
-  ETANOL = 'Etanol',
-  GASOLINE = 'Gasolina',
-  FLEX = 'Flex'
+  DIESEL = "Diesel",
+  ETANOL = "Etanol",
+  GASOLINE = "Gasolina",
+  FLEX = "Flex",
 }
 
-@Entity('cars')
-
+@Entity("cars")
 class Car {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({ length: 50 })
-  brand: string
+  brand: string;
 
   @Column({ length: 50 })
-  model: string
+  model: string;
 
   @Column({ length: 4 })
-  year: string
+  year: string;
 
   @Column({
-    type: 'enum',
+    type: "enum",
     enum: Fuels,
   })
   fuel_type: Fuels;
 
   @Column({ length: 50 })
-  color: string
+  color: string;
 
   @Column()
-  kilometers: number
+  kilometers: number;
 
-  @Column({ type: 'float' })
-  fipe_price: number
+  @Column({ type: "float" })
+  fipe_price: number;
 
-  @Column({ type: 'float' })
-  price: number
+  @Column({ type: "float" })
+  price: number;
 
-  @Column({ type: 'text' })
-  description: string
+  @Column({ type: "text" })
+  description: string;
 
-  @CreateDateColumn({ type: 'date' })
+  @CreateDateColumn({ type: "date" })
   createdAt!: string;
-
 }
 
-export default Car
+export { Car, Fuels };

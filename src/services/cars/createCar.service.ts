@@ -1,15 +1,15 @@
 import AppDataSource from "../../data-source";
 import { Car } from "../../entities";
-import { ICarRequest } from "../../interfaces/cars/car.interface";
+import { car, carRequest } from "../../interfaces/cars/car.interface";
 import { carSchema } from "../../schemas/car.schema";
 
-const createCarService = async (data: ICarRequest) => {
+const createCarService = async (data: carRequest): Promise<car> => {
   const carRepository = AppDataSource.getRepository(Car);
 
-  const newCar = carRepository.create(data);
+  const newCar: Car = carRepository.create(data);
   await carRepository.save(newCar);
 
-  const validatedCar = carSchema.parse(newCar);
+  const validatedCar: car = carSchema.parse(newCar);
 
   return validatedCar;
 };
