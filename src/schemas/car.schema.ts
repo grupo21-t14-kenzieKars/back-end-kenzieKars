@@ -1,10 +1,11 @@
 import { z } from "zod";
+import { Fuels } from "../entities/car.entity";
 
 const carRequestSchema = z.object({
   brand: z.string(),
   model: z.string(),
   year: z.string(),
-  fuel_type: z.enum(["Diesel", "Etanol", "Gasolina", "Flex"]),
+  fuel_type: z.nativeEnum(Fuels),
   color: z.string(),
   kilometers: z.number(),
   fipe_price: z.number(),
@@ -17,7 +18,7 @@ const carSchema = z.object({
   brand: z.string(),
   model: z.string(),
   year: z.string(),
-  fuel_type: z.enum(["Diesel", "Etanol", "Gasolina", "Flex"]),
+  fuel_type: z.nativeEnum(Fuels),
   color: z.string(),
   kilometers: z.number(),
   fipe_price: z.number(),
@@ -26,4 +27,6 @@ const carSchema = z.object({
   createdAt: z.string(),
 });
 
-export { carRequestSchema, carSchema };
+const listCarEschema = z.array(carSchema);
+
+export { carRequestSchema, carSchema, listCarEschema };
