@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ICar } from "../../interfaces/cars/car.interface";
-import listCarByIdService from "../../services/cars/listCarById.service";
+import { listCarByIdService } from "../../services/cars";
 
 const listCarByIdController = async (
   req: Request,

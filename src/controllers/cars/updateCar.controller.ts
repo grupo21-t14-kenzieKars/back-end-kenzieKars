@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { ICar, ICarUpdate } from "../../interfaces/cars/car.interface";
-import updateCarService from "../../services/cars/updateCar.service";
+import { ICarUpdate } from "../../interfaces/cars/car.interface";
+import { updateCarService } from "../../services/cars";
 
 const uptadeCarController = async (req: Request, res: Response):Promise<Response> => {
   const carUpdateData: ICarUpdate = req.body;
@@ -9,4 +9,4 @@ const uptadeCarController = async (req: Request, res: Response):Promise<Response
   return res.status(200).json(updateCar);
 };
 
-export { uptadeCarController };
+export default  uptadeCarController 

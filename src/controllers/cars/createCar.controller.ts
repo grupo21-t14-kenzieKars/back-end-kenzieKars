@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import createCarService from "../../services/cars/createCar.service";
 import { ICar, ICarRequest } from "../../interfaces/cars/car.interface";
+import { createCarService } from "../../services/cars";
 
 const createCarController = async (
   req: Request,
