@@ -1,15 +1,15 @@
 import { Repository } from "typeorm";
 import DataSourceConfig from "../../data-source";
 import { Car } from "../../entities";
+import { ICar } from "../../interfaces/cars/car.interface";
 import { listCarEschema } from "../../schemas/car.schema";
-import { listCar } from "../../interfaces/cars/car.interface";
 
-const listCarsService = async (): Promise<listCar> => {
+const listCarsService = async (): Promise<ICar[]> => {
   const carRepository: Repository<Car> = DataSourceConfig.getRepository(Car);
 
   const findCars: Array<Car> = await carRepository.find();
 
-  const listCars: listCar = listCarEschema.parse(findCars);
+  const listCars: ICar[] = listCarEschema.parse(findCars);
 
   return listCars;
 };
