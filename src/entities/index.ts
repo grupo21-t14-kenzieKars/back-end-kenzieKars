@@ -1,5 +1,3 @@
-import Car from "./car.entity"
+import { Car } from "./car.entity"
+export { Car };
 
-export {
-    Car
-}
