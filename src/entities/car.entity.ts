@@ -50,7 +50,7 @@ class Car {
   description: string;
 
   
-  @ManyToOne(() => User, (user) => user.posters, { onDelete: "CASCADE" })
+  @ManyToOne(() => User, (user) => user.cars, { onDelete: "CASCADE" })
   user: User;
 
   @CreateDateColumn({ type: "date" })
