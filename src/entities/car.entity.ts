@@ -2,8 +2,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { User } from "./user.entity";
 
 enum Fuels {
   DIESEL = "Diesel",
@@ -47,8 +49,15 @@ class Car {
   @Column({ type: "text" })
   description: string;
 
+  
+  @ManyToOne(() => User, (user) => user.cars, { onDelete: "CASCADE" })
+  user: User;
+
   @CreateDateColumn({ type: "date" })
   createdAt!: string;
+    userCreat: any;
 }
+
+
 
 export { Car, Fuels };
