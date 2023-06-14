@@ -51,14 +51,4 @@ const UserRequestSchema = z.object({
   address: CreatedAddressSchema,
 })
 
-const UserUpdateSchema = UserSchema.omit({
-  id: true,
-  is_seller: true,
-  address: true,
-  createdAt: true,
-  updatedAt: true,
-}).extend({
-  address: AddressReturnSchema.partial()
-}).partial()
-
-export { UserReturnSchema, AddressReturnSchema, UserRequestSchema, UserUpdateSchema };
+export { UserReturnSchema, AddressReturnSchema, UserRequestSchema };

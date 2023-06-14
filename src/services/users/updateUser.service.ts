@@ -3,9 +3,9 @@ import { IUserReturn, IUserUpdate } from "../../interfaces/users/user.interface"
 import { User } from "../../entities/user.entity";
 import AppDataSource from "../../data-source";
 import { AppError } from "../../errors/AppError";
-import { UserDataSchema } from "../../schemas/user.schema";
+import { UserReturnSchema } from "../../schemas/user.schema";
 
-const UpdateUserService = async (id: string, data): Promise<IUserReturn> =>{
+const UpdateUserService = async (id: string, data: IUserUpdate): Promise<IUserReturn> =>{
     const userRepository: Repository<User> = AppDataSource.getRepository(User)
     const findUser: User | null = await userRepository.findOneBy({id:id})
 
@@ -20,7 +20,7 @@ const UpdateUserService = async (id: string, data): Promise<IUserReturn> =>{
 
     await userRepository.save(updatedUser)
 
-    return UserDataSchema.parse(updatedUser)
+    return UserReturnSchema.parse(updatedUser)
 }
 
 export default UpdateUserService;
