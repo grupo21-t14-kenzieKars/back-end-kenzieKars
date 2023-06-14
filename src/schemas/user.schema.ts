@@ -39,7 +39,6 @@ const UserReturnSchema = UserSchema.omit({
     password: true
 })
 
-
 const UserRequestSchema = z.object({
   email: z.string().email(),
   name: z.string().max(50),
