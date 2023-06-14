@@ -1,4 +1,4 @@
-import { Request, Response, response } from "express";
+import { Request, Response } from "express";
 import ILogin from "../../interfaces/login/login.interface";
 import loginService from "../../services/login/login.service";
 

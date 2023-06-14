@@ -1,13 +1,12 @@
 import { z } from "zod";
 
 const CreatedAddressSchema = z.object({
-  id: z.string().uuid(),
   zip_code: z.string().length(8),
   city: z.string().max(50),
   state: z.string().length(2),
   street: z.string().max(127),
-  number: z.string().max(20).optional().nullable(),
-  complement: z.string().max(127).optional().nullable(),
+  number: z.string().max(20).optional().default("null"),
+  complement: z.string().max(127).optional().default("null")
 });
 
 const UserSchema = z.object({
@@ -40,14 +39,16 @@ const UserReturnSchema = UserSchema.omit({
     password: true
 })
 
-const UserDataSchema = UserSchema.omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-  deletedAt: true,
-  address: true,
-}).extend({
-  address: AddressReturnSchema.omit({id: true})
+const UserRequestSchema = z.object({
+  email: z.string().email(),
+  name: z.string().max(50),
+  cpf: z.string().length(11),
+  phone: z.string().length(13),
+  birth_date: z.string(),
+  description: z.string(),
+  password: z.string(),
+  is_seller: z.boolean(),
+  address: CreatedAddressSchema,
 })
 
 const UserUpdateSchema = UserSchema.omit({
@@ -60,4 +61,4 @@ const UserUpdateSchema = UserSchema.omit({
   address: AddressReturnSchema.partial()
 }).partial()
 
-export { UserReturnSchema, AddressReturnSchema, UserDataSchema, UserUpdateSchema };
+export { UserReturnSchema, AddressReturnSchema, UserRequestSchema, UserUpdateSchema };
