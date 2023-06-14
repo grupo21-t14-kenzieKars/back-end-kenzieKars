@@ -39,6 +39,7 @@ const UserReturnSchema = UserSchema.omit({
     password: true
 })
 
+
 const UserRequestSchema = z.object({
   email: z.string().email(),
   name: z.string().max(50),
@@ -51,4 +52,17 @@ const UserRequestSchema = z.object({
   address: CreatedAddressSchema,
 })
 
-export { UserReturnSchema, AddressReturnSchema, UserRequestSchema };
+const UserUpdateSchema = UserRequestSchema.omit({
+  is_seller: true})
+  .extend({
+    address: CreatedAddressSchema.pick({
+      zip_code: true,
+      city: true,
+      state: true,
+      street: true,
+      number: true,
+      complement: true,
+    }),
+  }).partial()
+
+export { UserReturnSchema, AddressReturnSchema, UserRequestSchema, UserUpdateSchema };

@@ -12,4 +12,4 @@ const requireSellerMiddleware = (req: Request, res: Response, next: NextFunction
   return next();
 };
 
-export  default requireSellerMiddleware 
+export default requireSellerMiddleware 

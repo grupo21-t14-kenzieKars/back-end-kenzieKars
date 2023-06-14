@@ -7,7 +7,10 @@ import { UserReturnSchema } from "../../schemas/user.schema";
 
 const UpdateUserService = async (id: string, data: IUserUpdate): Promise<IUserReturn> =>{
     const userRepository: Repository<User> = AppDataSource.getRepository(User)
-    const findUser: User | null = await userRepository.findOneBy({id:id})
+    const findUser: User | null = await userRepository.findOne({
+        where: { id },
+        relations: ["address"],
+    })
 
     if(!findUser){
         throw new AppError("User not found!", 404)
@@ -15,12 +18,17 @@ const UpdateUserService = async (id: string, data: IUserUpdate): Promise<IUserRe
 
     const updatedUser = userRepository.create({
         ...findUser,
-        ...data
+        ...data,
     })
+
+    const userWithDate = {
+        ...updatedUser,
+        birth_date: new Date(updatedUser.birth_date),
+    }
 
     await userRepository.save(updatedUser)
 
-    return UserReturnSchema.parse(updatedUser)
+    return UserReturnSchema.parse(userWithDate)
 }
 
 export default UpdateUserService;

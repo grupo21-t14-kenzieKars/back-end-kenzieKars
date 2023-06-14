@@ -11,7 +11,12 @@ const createUserService = async (data: IUserRequest): Promise<IUserReturn> =>{
 
     await userRepository.save(user);
 
-    const newUser = UserReturnSchema.parse(user);
+    const userWithDate = {
+        ...user,
+        birth_date: new Date(user.birth_date),
+    }
+
+    const newUser = UserReturnSchema.parse(userWithDate);
 
     return newUser
 }
