@@ -63,7 +63,7 @@ export class User {
   })
   address: Address;
 
-@OneToMany(() => Car, (car) => car.user)
+  @OneToMany(() => Car, (car) => car.user)
   cars: Car[];
 
   @BeforeInsert()

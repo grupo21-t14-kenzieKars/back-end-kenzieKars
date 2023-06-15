@@ -1,14 +1,12 @@
 import { z } from "zod";
-import { carSchema } from "./car.schema";
 
-const CeatedAddressSchema = z.object({
-  id: z.string().uuid(),
+const CreatedAddressSchema = z.object({
   zip_code: z.string().length(8),
   city: z.string().max(50),
   state: z.string().length(2),
   street: z.string().max(127),
-  number: z.string().max(20).optional(),
-  complement: z.string().max(127).optional(),
+  number: z.string().max(20).optional().default("null"),
+  complement: z.string().max(127).optional().default("null")
 });
 
 const UserSchema = z.object({
@@ -21,10 +19,10 @@ const UserSchema = z.object({
   description: z.string(),
   password: z.string(),
   is_seller: z.boolean(),
-  address: CeatedAddressSchema,
+  address: CreatedAddressSchema,
   createdAt: z.date(),
   updatedAt: z.date(),
-  deletedAt: z.date(),
+  deletedAt: z.date().nullable(),
 });
 
 const AddressReturnSchema = z.object({
@@ -38,7 +36,32 @@ const AddressReturnSchema = z.object({
 });
 
 const UserReturnSchema = UserSchema.omit({
-    
+    password: true
 })
 
-export { UserReturnSchema, AddressReturnSchema };
+const UserRequestSchema = z.object({
+  email: z.string().email(),
+  name: z.string().max(50),
+  cpf: z.string().length(11),
+  phone: z.string().length(13),
+  birth_date: z.string(),
+  description: z.string(),
+  password: z.string(),
+  is_seller: z.boolean(),
+  address: CreatedAddressSchema,
+})
+
+const UserUpdateSchema = UserRequestSchema.omit({
+  is_seller: true})
+  .extend({
+    address: CreatedAddressSchema.pick({
+      zip_code: true,
+      city: true,
+      state: true,
+      street: true,
+      number: true,
+      complement: true,
+    }),
+  }).partial()
+
+export { UserReturnSchema, AddressReturnSchema, UserRequestSchema, UserUpdateSchema };
