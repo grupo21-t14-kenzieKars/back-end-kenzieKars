@@ -11,7 +11,7 @@ const ensureUuidIsValidMiddleware = async (
   const UUIdIsValid = validate(id);
 
   if (!UUIdIsValid) {
-    return next (new AppError(`this ${id} not valid uuid`, 400));
+    throw new AppError(`this ${id} not valid uuid`, 400);
   }
 
   next();

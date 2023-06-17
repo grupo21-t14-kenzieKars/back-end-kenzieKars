@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
 import { IUserReturn } from "../../interfaces/users/user.interface";
 import AppDataSource from "../../data-source";
-import { User } from "../../entities/user.entity";
 import { UserReturnSchema } from "../../schemas/user.schema";
+import { User } from "../../entities";
 
 const listUserByTokenService = async (id: string): Promise<IUserReturn> => {
     const userRepository: Repository<User> = AppDataSource.getRepository(User);
