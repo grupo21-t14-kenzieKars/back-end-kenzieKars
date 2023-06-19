@@ -1,9 +1,9 @@
 import { Repository } from "typeorm";
 import { IUserReturn, IUserUpdate } from "../../interfaces/users/user.interface";
-import { User } from "../../entities/user.entity";
 import AppDataSource from "../../data-source";
 import { AppError } from "../../errors/AppError";
 import { UserReturnSchema } from "../../schemas/user.schema";
+import { User } from "../../entities";
 
 const UpdateUserService = async (id: string, data: IUserUpdate): Promise<IUserReturn> =>{
     const userRepository: Repository<User> = AppDataSource.getRepository(User)
