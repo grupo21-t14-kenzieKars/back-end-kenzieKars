@@ -10,13 +10,7 @@ import { User } from "../../entities";
 
 const createUserService = async (data: IUserRequest): Promise<IUserReturn> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
-  const finduser = await userRepository.findOneBy({
-    email: data.email,
-  });
 
-  if (finduser) {
-    throw new AppError("User exists", 300);
-  }
   const user = userRepository.create(data);
 
   await userRepository.save(user);
