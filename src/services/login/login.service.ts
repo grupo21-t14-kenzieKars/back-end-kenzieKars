@@ -13,20 +13,28 @@ const loginService = async ({ email, password }: ILogin) => {
   });
 
   if (!user) {
-  throw new AppError("user not found", 200);
+    throw new AppError("user not found", 200);
   }
 
   const pass = await compare(password, user.password);
 
   if (!pass) {
-     throw new AppError("Email or passsword invalid");
+    throw new AppError("Email or passsword invalid");
   }
 
-  const token = jwt.sign({}, `${process.env.SECRET_KEY}`, {
-    subject: String(user.id),
-    expiresIn: "24h",
-  });
-  
+  const token: string = jwt.sign(
+    {
+      seller: user.is_seller,
+      user_id: user.id
+    },
+    process.env.SECRET_KEY!,
+    {
+      expiresIn: '24h',
+      subject: user.id.toString()
+    }
+  )
+
+
   return { token: token };
 };
 

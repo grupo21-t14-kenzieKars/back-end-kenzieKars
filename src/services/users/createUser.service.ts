@@ -11,16 +11,12 @@ import { User } from "../../entities";
 const createUserService = async (data: IUserRequest): Promise<IUserReturn> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
+
   const user = userRepository.create(data);
 
   await userRepository.save(user);
 
-  const userWithDate = {
-    ...user,
-    birth_date: new Date(user.birth_date),
-  };
-
-  const newUser = UserReturnSchema.parse(userWithDate);
+  const newUser = UserReturnSchema.parse(user);
 
   return newUser;
 };

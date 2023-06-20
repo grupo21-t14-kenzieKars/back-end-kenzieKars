@@ -33,7 +33,15 @@ const ensureauthMiddleware = (
 
       return next();
     }
-  );
+
+    const user = {
+      user_id: decoded.user_id,
+      is_seller: decoded.is_seller,
+    }
+    res.locals.user = user
+
+    return next();
+  });
 };
 
 export default ensureauthMiddleware;
