@@ -26,7 +26,7 @@ const loginService = async ({ email, password }: ILogin) => {
     subject: String(user.id),
     expiresIn: "24h",
   });
-
+  
   return { token: token };
 };
 
