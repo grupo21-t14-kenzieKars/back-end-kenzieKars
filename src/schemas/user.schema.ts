@@ -15,7 +15,7 @@ const UserSchema = z.object({
   name: z.string().max(50),
   cpf: z.string().length(11),
   phone: z.string().length(13),
-  birth_date: z.date(),
+  birth_date: z.string(),
   description: z.string(),
   password: z.string(),
   is_seller: z.boolean(),
