@@ -1,12 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import {  ZodTypeAny } from "zod";
+import { ZodTypeAny } from "zod";
 
 const verifySchemaMiddleware =
-  (schema: ZodTypeAny) =>
-    (req: Request, res: Response, next: NextFunction) => {
-      const validatedData = schema.parse(req.body);
-      req.body = validatedData;
-      return next();
+  (schema: ZodTypeAny) => (req: Request, res: Response, next: NextFunction) => {
+    const validatedData = schema.parse(req.body);
+    req.body = validatedData;
+    return next();
   };
 
 export default verifySchemaMiddleware;

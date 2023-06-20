@@ -3,8 +3,10 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { ImagePoster } from "./imagensCar.etity";
 import { User } from "./user.entity";
 
 enum Fuels {
@@ -49,15 +51,17 @@ class Car {
   @Column({ type: "text" })
   description: string;
 
-  
   @ManyToOne(() => User, (user) => user.cars, { onDelete: "CASCADE" })
   user: User;
+  
+  @OneToMany(() => ImagePoster, (image) => image.car, {
+    cascade: ["insert", "update"],
+  })
+  images: ImagePoster[];
 
   @CreateDateColumn({ type: "date" })
   createdAt!: string;
-    userCreat: any;
+  userCreat: any;
 }
-
-
 
 export { Car, Fuels };

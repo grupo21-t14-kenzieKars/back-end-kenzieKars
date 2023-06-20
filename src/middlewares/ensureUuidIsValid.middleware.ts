@@ -7,7 +7,7 @@ const ensureUuidIsValidMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
-  const {id} = req.params;
+  const { id } = req.params;
   const UUIdIsValid = validate(id);
 
   if (!UUIdIsValid) {
@@ -18,5 +18,3 @@ const ensureUuidIsValidMiddleware = async (
 };
 
 export default ensureUuidIsValidMiddleware;
-
-

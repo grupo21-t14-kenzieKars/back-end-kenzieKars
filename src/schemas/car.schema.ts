@@ -11,20 +11,17 @@ const carRequestSchema = z.object({
   fipe_price: z.number(),
   price: z.number(),
   description: z.string(),
+  imagesCar: z
+    .object({
+      url: z.string(),
+    })
+    .array(),
 });
 
-const carSchema = z.object({
+const carSchema = carRequestSchema.extend({
   id: z.string(),
-  brand: z.string(),
-  model: z.string(),
-  year: z.string(),
-  fuel_type: z.nativeEnum(Fuels),
-  color: z.string(),
-  kilometers: z.number(),
-  fipe_price: z.number(),
-  price: z.number(),
-  description: z.string(),
-  createdAt: z.string(),
+  updatedAt: z.date().nullish(),
+  createdAt: z.date().nullish(),
 });
 
 const listCarEschema = z.array(carSchema);
