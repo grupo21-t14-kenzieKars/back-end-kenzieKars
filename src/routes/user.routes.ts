@@ -7,6 +7,7 @@ import { verifySchemaMiddleware } from "../middlewares";
 import { UserRequestSchema, UserUpdateSchema } from "../schemas/user.schema";
 import ensureauthMiddleware from "../middlewares/ensureAuthMiddleware";
 import listUserByTokenController from "../controllers/users/listUserByToken.controller";
+import ensureUuidIsValidMiddleware from './../middlewares/ensureUuidIsValid.middleware';
 
 const userRouter: Router = Router();
 
