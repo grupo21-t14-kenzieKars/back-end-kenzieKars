@@ -18,8 +18,8 @@ const ensureauthMiddleware = (req: Request, res: Response, next: NextFunction) =
     }
 
     const user = {
-      id: decoded.id,
-      isSeller: decoded.isSeller,
+      user_id: decoded.user_id,
+      is_seller: decoded.is_seller,
     }
     res.locals.user = user
 

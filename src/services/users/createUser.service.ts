@@ -15,18 +15,13 @@ const createUserService = async (data: IUserRequest): Promise<IUserReturn> => {
   });
 
   if (finduser) {
-    throw new AppError("User exists", 300);
+    throw new AppError("User exists", 403);
   }
   const user = userRepository.create(data);
 
   await userRepository.save(user);
 
-  const userWithDate = {
-    ...user,
-    birth_date: new Date(user.birth_date),
-  };
-
-  const newUser = UserReturnSchema.parse(userWithDate);
+  const newUser = UserReturnSchema.parse(user);
 
   return newUser;
 };

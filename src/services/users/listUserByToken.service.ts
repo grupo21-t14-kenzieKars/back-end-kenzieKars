@@ -3,25 +3,25 @@ import { IUserReturn } from "../../interfaces/users/user.interface";
 import AppDataSource from "../../data-source";
 import { UserReturnSchema } from "../../schemas/user.schema";
 import { User } from "../../entities";
+import { AppError } from "../../errors/AppError";
 
-const listUserByTokenService = async (id: string): Promise<IUserReturn> => {
+const listUserByTokenService = async (userId: string): Promise<IUserReturn> => {
     const userRepository: Repository<User> = AppDataSource.getRepository(User);
+
+    if (!userId) {
+        throw new AppError('Usúario não encontrado', 404)
+    }
 
     const user = await userRepository.findOne({
         where: {
-            id
+            id: userId
         },
-        relations:{
+        relations: {
             address: true
         }
     });
 
-    const userWithDate = {
-        ...user,
-        birth_date: new Date(user!.birth_date),
-    }
-
-    return UserReturnSchema.parse(userWithDate);
+    return UserReturnSchema.parse(user);
 }
 
 export default listUserByTokenService;
