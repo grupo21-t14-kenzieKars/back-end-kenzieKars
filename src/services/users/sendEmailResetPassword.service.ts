@@ -18,7 +18,7 @@ const sendEmailResetPasswordService = async (email: string) => {
 
     const resetToken = randomUUID()
 
-    const data = { reset_token: resetToken }
+    const data = { reset_token: resetToken, reset_token_date: new Date() }
 
     const updatedUser = userRepository.create({
         ...user,
@@ -39,23 +39,24 @@ const sendEmailResetPasswordService = async (email: string) => {
 
     const emailContent = {
         body: {
-            name: user.name,
-            intro: 'You have received this email because a password reset request for your account was received.',
+            signature: false,
+            greeting: false,
+            title: `Ola, ${user.name}`,
+            intro: 'Este email é para redefinição de senha , sigua os passos abaixo',
             action: {
-                instructions: 'Click the button below to reset your password:',
+                instructions: 'Clique no botão para redefinir sua senha',
                 button: {
                     color: '#4529E6',
-                    text: 'Reset your password',
+                    text: 'Redefinir senha',
                     link: `http://localhost:3000/resetPassword/${resetToken}`
                 }
             },
-            outro: 'If you did not request a password reset, no further action is required on your part.'
+            outro: 'Se você não solicitou uma redefinição de senha, nenhuma outra ação será necessária de sua parte.'
         }
     };
     const emailBody = mailGenerator.generate(emailContent)
 
     const sendEmail = async () => {
-        console.log("asuidhasiudhasuidhsaiudhasiudsa");
 
         const trasnporter = createTransport({
             host: "smtp.gmail.com",
@@ -64,12 +65,11 @@ const sendEmailResetPasswordService = async (email: string) => {
                 pass: process.env.SMTP_PASS
             }
         })
-        console.log("===============================================================");
 
         await trasnporter.sendMail({
-            from: "lcs.rs23@gmail.com",
+            from: "motors@mail.com",
             to: user.email,
-            subject: 'Recovery Password',
+            subject: 'Recuperação de senha',
             html: emailBody
         }).then(() => {
             console.log("Email send with sucess")

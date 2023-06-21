@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import sendEmailResetPassword from "../../services/users/sendEmailRecoveryPwd.service";
+import sendEmailResetPassword from "../../services/users/sendEmailResetPassword.service";
 
 const sendEmailResetPwd = async (req: Request, res: Response) => {
     const { email } = req.body

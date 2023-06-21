@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import RecoveryPwdService from "../../services/users/recoveryPwd.service";
+import RecoveryPwdService from "../../services/users/resetPassword.service";
 
 const recoveryPwd = async (req: Request, res: Response) => {
     const { password } = req.body

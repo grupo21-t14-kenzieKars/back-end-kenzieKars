@@ -65,4 +65,12 @@ const UserUpdateSchema = UserRequestSchema.omit({
     }),
   }).partial()
 
-export { UserReturnSchema, AddressReturnSchema, UserRequestSchema, UserUpdateSchema };
+const SendEmailSchema = z.object({
+  email: z.string().email()
+})
+
+const RecoveryPasswordSchema = z.object({
+  password: z.string()
+})
+
+export { UserReturnSchema, AddressReturnSchema, UserRequestSchema, UserUpdateSchema, RecoveryPasswordSchema, SendEmailSchema };
