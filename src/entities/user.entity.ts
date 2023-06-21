@@ -8,6 +8,7 @@ import {
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
+  Timestamp,
   UpdateDateColumn,
 } from "typeorm";
 import { Address } from "./address.entity";
@@ -44,9 +45,9 @@ export class User {
   is_seller: boolean;
 
   @Column({ nullable: true })
-  reset_token?: string;
+  reset_token?: string
 
-  @Column({ nullable: true, type: "date" })
+  @Column({ nullable: true, type: "timestamptz" })
   reset_token_date?: Date;
 
   @CreateDateColumn()
