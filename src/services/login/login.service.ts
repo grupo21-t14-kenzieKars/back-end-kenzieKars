@@ -24,7 +24,7 @@ const loginService = async ({ email, password }: ILogin) => {
 
   const token: string = jwt.sign(
     {
-      seller: user.is_seller,
+      is_seller: user.is_seller,
       user_id: user.id
     },
     process.env.SECRET_KEY!,
