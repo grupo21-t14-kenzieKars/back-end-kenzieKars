@@ -27,14 +27,10 @@ const UpdateUserService = async (
     ...data,
   });
 
-  const userWithDate = {
-    ...updatedUser,
-    birth_date: new Date(updatedUser.birth_date),
-  };
 
   await userRepository.save(updatedUser);
 
-  return UserReturnSchema.parse(userWithDate);
+  return UserReturnSchema.parse(updatedUser);
 };
 
 export default UpdateUserService;

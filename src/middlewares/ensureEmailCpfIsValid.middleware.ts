@@ -8,21 +8,24 @@ const ensureEmailCpfIsValidMiddleware = async (req: Request, res: Response, next
     const user = req.body
     const userRepository: Repository<User> = AppDataSource.getRepository(User)
 
-    const uniqueEmail = await userRepository.findOneBy({
-        email: user.email
-    });
+    if (user.email) {
+        const uniqueEmail = await userRepository.findOneBy({
+            email: user.email
+        });
+        if (uniqueEmail) {
+            throw new AppError("Email already registered", 409)
+        }
+    }
+    if (user.cpf) {
+        const uniqueCpf = await userRepository.findOneBy({
+            cpf: user.cpf
+        })
 
-    if(uniqueEmail){
-        throw new AppError("Email already registered", 409)
+        if (uniqueCpf) {
+            throw new AppError("Cpf already registered", 409)
+        }
     }
 
-    const uniqueCpf = await userRepository.findOneBy({
-        cpf: user.cpf
-    })
-
-    if(uniqueCpf){
-        throw new AppError("Cpf already registered", 409)
-    }
 
     return next()
 }

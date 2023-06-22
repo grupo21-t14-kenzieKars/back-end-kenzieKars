@@ -1,6 +1,15 @@
 import { z } from "zod";
 import { Fuels } from "../entities/car.entity";
 
+const imagesSchema = z.object({
+  one: z.string(),
+  two: z.string().optional().default('null'),
+  three: z.string().optional().default('null'),
+  four: z.string().optional().default('null'),
+  five: z.string().optional().default('null'),
+  six: z.string().optional().default('null')
+})
+
 const carRequestSchema = z.object({
   brand: z.string(),
   model: z.string(),
@@ -11,17 +20,13 @@ const carRequestSchema = z.object({
   fipe_price: z.number(),
   price: z.number(),
   description: z.string(),
-  imagesCar: z
-    .object({
-      url: z.string(),
-    })
-    .array(),
+  images: imagesSchema
 });
 
 const carSchema = carRequestSchema.extend({
   id: z.string(),
-  updatedAt: z.date().nullish(),
-  createdAt: z.date().nullish(),
+  updatedAt: z.string().nullish(),
+  createdAt: z.string().nullish(),
 });
 
 const listCarEschema = z.array(carSchema);
