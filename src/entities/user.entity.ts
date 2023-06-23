@@ -8,12 +8,12 @@ import {
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
-  Timestamp,
   UpdateDateColumn,
 } from "typeorm";
 import { Address } from "./address.entity";
 import { getRounds, hashSync } from "bcryptjs";
 import { Car } from "./car.entity";
+import { CarComment } from "./comment.entity";
 
 @Entity("user")
 export class User {
@@ -44,8 +44,8 @@ export class User {
   @Column({ default: false })
   is_seller: boolean;
 
-  @Column({ nullable: true })
-  reset_token?: string
+  @Column({ type: 'text', nullable: true })
+  reset_token?: string | null
 
   @Column({ nullable: true, type: "timestamptz" })
   reset_token_date?: Date;
@@ -66,6 +66,9 @@ export class User {
 
   @OneToMany(() => Car, (car) => car.user)
   cars: Car[];
+
+  @OneToMany(() => CarComment, (comment) => comment.user)
+  comments: CarComment[];
 
   @BeforeInsert()
   @BeforeUpdate()

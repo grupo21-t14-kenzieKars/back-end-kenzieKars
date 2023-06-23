@@ -29,11 +29,13 @@ const CarOwner = z.object({
   name: z.string(),
   id: z.string()
 })
+
 const carSchema = carRequestSchema.extend({
   id: z.string(),
   updatedAt: z.string().nullish(),
   createdAt: z.string().nullish(),
 });
+
 const carListSchema = carRequestSchema.extend({
   id: z.string(),
   updatedAt: z.string().nullish(),
