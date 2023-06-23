@@ -9,20 +9,20 @@ export class Images {
     @Column()
     one: string;
 
-    @Column({ nullable: true })
-    two?: string;
+    @Column({ type: 'text', nullable: true, default: null })
+    two?: string | null;
 
-    @Column({ nullable: true })
-    three?: string;
+    @Column({ type: 'text', nullable: true, default: null })
+    three?: string | null;
 
-    @Column({ nullable: true })
-    four?: string;
+    @Column({ type: 'text', nullable: true, default: null })
+    four?: string | null;
 
-    @Column({ nullable: true })
-    five?: string;
+    @Column({ type: 'text', nullable: true, default: null })
+    five?: string | null;
 
-    @Column({ nullable: true })
-    six?: string;
+    @Column({ type: 'text', nullable: true, default: null })
+    six?: string | null;
 
     @OneToOne(() => Car, (car) => car.images, { onDelete: "CASCADE" })
     @JoinColumn()

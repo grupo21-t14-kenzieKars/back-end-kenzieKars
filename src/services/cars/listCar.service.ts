@@ -7,7 +7,12 @@ import { listCarEschema } from "../../schemas/car.schema";
 const listCarsService = async (): Promise<ICar[]> => {
   const carRepository: Repository<Car> = DataSourceConfig.getRepository(Car);
 
-  const findCars: Array<Car> = await carRepository.find();
+  const findCars = await carRepository.find({
+    relations: {
+      images: true,
+      user: true
+    }
+  })
 
   const listCars: ICar[] = listCarEschema.parse(findCars);
 

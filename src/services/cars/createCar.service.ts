@@ -13,11 +13,11 @@ const createCarService = async (
     user: {
       id: userId,
     },
-    ...data
+    ...data,
   });
-  console.log(newCar);
 
   await carRepository.save(newCar);
+
   const validatedCar: ICar = carSchema.parse(newCar);
 
   return validatedCar;
