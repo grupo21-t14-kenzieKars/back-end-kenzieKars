@@ -3,11 +3,13 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Images } from './carImages.entity'
 import { User } from "./user.entity";
+import { CarComment } from "./comment.entity";
 
 enum Fuels {
   DIESEL = "Diesel",
@@ -59,6 +61,8 @@ class Car {
   })
   images: Images;
 
+  @OneToMany(() => CarComment, (comment) => comment.car)
+  comments: CarComment[]
   @CreateDateColumn({ type: "date" })
   createdAt!: string;
   userCreat: any;

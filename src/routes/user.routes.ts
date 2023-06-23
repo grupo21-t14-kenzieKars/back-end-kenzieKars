@@ -15,7 +15,7 @@ const userRouter: Router = Router();
 userRouter.post("", verifySchemaMiddleware(UserRequestSchema), ensureEmailCpfIsValidMiddleware, createUserController);
 userRouter.get("", listUserController);
 userRouter.get("/profile", ensureauthMiddleware, listUserByTokenController);
-userRouter.patch("/:id", ensureauthMiddleware, ensureUuidIsValidMiddleware, verifySchemaMiddleware(UserUpdateSchema), ensureEmailCpfIsValidMiddleware, updateUserController);
+userRouter.patch("/:id", ensureauthMiddleware, ensureUuidIsValidMiddleware, verifySchemaMiddleware(UserUpdateSchema), updateUserController);
 userRouter.delete("/:id", ensureauthMiddleware, deleteUserController);
 userRouter.post('/recovery', verifySchemaMiddleware(SendEmailSchema), sendEmailResetPwd)
 userRouter.post('/recovery/:token', verifySchemaMiddleware(RecoveryPasswordSchema), recoveryPwd)

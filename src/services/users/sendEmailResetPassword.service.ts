@@ -5,7 +5,6 @@ import { User } from "../../entities";
 import { randomUUID } from "node:crypto";
 import { createTransport } from "nodemailer";
 import Mailgen from "mailgen";
-import { log } from "node:console";
 
 const sendEmailResetPasswordService = async (email: string) => {
     const userRepository: Repository<User> = AppDataSource.getRepository(User);
@@ -32,7 +31,7 @@ const sendEmailResetPasswordService = async (email: string) => {
         theme: 'default',
         product: {
             name: 'Motors Company',
-            link: 'http://localhost:3000'
+            link: 'http://localhost:5173'
 
         }
     })
@@ -42,13 +41,13 @@ const sendEmailResetPasswordService = async (email: string) => {
             signature: false,
             greeting: false,
             title: `Ola, ${user.name}`,
-            intro: 'Este email é para redefinição de senha , sigua os passos abaixo',
+            intro: 'Este email é para redefinição de senha , siga os passos abaixo',
             action: {
                 instructions: 'Clique no botão para redefinir sua senha',
                 button: {
                     color: '#4529E6',
                     text: 'Redefinir senha',
-                    link: `http://localhost:3000/resetPassword/${resetToken}`
+                    link: `http://localhost:5173/resetPassword/${resetToken}`
                 }
             },
             outro: 'Se você não solicitou uma redefinição de senha, nenhuma outra ação será necessária de sua parte.'
