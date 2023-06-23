@@ -24,6 +24,14 @@ const UpdateUserService = async (
     throw new AppError("User not found!", 404);
   }
 
+  if (findUser.email == data.email) {
+    delete data.email
+  }
+
+  if (findUser.cpf == data.cpf) {
+    delete data.cpf
+  }
+
   if (data.email) {
     const uniqueEmail = await userRepository.findOneBy({
       email: data.email
@@ -42,14 +50,6 @@ const UpdateUserService = async (
     }
   }
 
-
-  if (findUser.email == data.email) {
-    delete data.email
-  }
-
-  if (findUser.cpf == data.cpf) {
-    delete data.cpf
-  }
   const addressInfo = addressRepository.create({
     ...findUser.address,
     ...data.address
