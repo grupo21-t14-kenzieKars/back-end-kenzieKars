@@ -24,6 +24,25 @@ const UpdateUserService = async (
     throw new AppError("User not found!", 404);
   }
 
+  if (data.email) {
+    const uniqueEmail = await userRepository.findOneBy({
+      email: data.email
+    });
+    if (uniqueEmail) {
+      throw new AppError("Email already registered", 409)
+    }
+  }
+  if (data.cpf) {
+    const uniqueCpf = await userRepository.findOneBy({
+      cpf: data.cpf
+    })
+
+    if (uniqueCpf) {
+      throw new AppError("Cpf already registered", 409)
+    }
+  }
+
+
   if (findUser.email == data.email) {
     delete data.email
   }
