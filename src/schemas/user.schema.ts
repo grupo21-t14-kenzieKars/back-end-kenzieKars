@@ -62,7 +62,7 @@ const UserUpdateSchema = UserRequestSchema.omit({
       street: true,
       number: true,
       complement: true,
-    }),
+    }).partial(),
   }).partial()
 
 const SendEmailSchema = z.object({
