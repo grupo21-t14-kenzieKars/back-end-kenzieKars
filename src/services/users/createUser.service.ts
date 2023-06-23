@@ -5,7 +5,6 @@ import {
   IUserRequest,
   IUserReturn,
 } from "../../interfaces/users/user.interface";
-import { AppError } from "../../errors/AppError";
 import { User } from "../../entities";
 
 const createUserService = async (data: IUserRequest): Promise<IUserReturn> => {
