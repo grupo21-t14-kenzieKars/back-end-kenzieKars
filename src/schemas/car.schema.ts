@@ -46,6 +46,6 @@ const listCarByUserEschema = z.object({
   cars: carListSchema.array(),
 });
 
-const listCarEschema = z.array(carSchema);
+const listCarEschema = z.array(carListSchema);
 
 export { carRequestSchema, carSchema, listCarEschema, listCarByUserEschema };
