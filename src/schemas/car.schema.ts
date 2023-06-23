@@ -8,9 +8,8 @@ const imagesSchema = z.object({
   three: z.string().nullable().default(null),
   four: z.string().nullable().default(null),
   five: z.string().nullable().default(null),
-  six: z.string().nullable().default(null)
-})
-
+  six: z.string().nullable().default(null),
+});
 
 const carRequestSchema = z.object({
   brand: z.string(),
@@ -27,8 +26,8 @@ const carRequestSchema = z.object({
 
 const CarOwner = z.object({
   name: z.string(),
-  id: z.string()
-})
+  id: z.string(),
+});
 
 const carSchema = carRequestSchema.extend({
   id: z.string(),
@@ -40,9 +39,15 @@ const carListSchema = carRequestSchema.extend({
   id: z.string(),
   updatedAt: z.string().nullish(),
   createdAt: z.string().nullish(),
-  user: CarOwner
+  user: CarOwner,
+});
+
+const listCarByUserEschema = z.object({
+  name: z.string().max(50),
+  description: z.string(),
+  cars: carListSchema.array(),
 });
 
 const listCarEschema = z.array(carListSchema);
 
-export { carRequestSchema, carSchema, listCarEschema };
+export { carRequestSchema, carSchema, listCarEschema, listCarByUserEschema };
