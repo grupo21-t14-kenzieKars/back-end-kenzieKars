@@ -11,7 +11,7 @@ const listCarByUserService = async (userId: string): Promise<ICArByUser> => {
       id: userId,
     },
     relations: {
-      cars: { images: true },
+      cars: { images: true, user: true },
     },
   });
 

@@ -43,7 +43,7 @@ const carListSchema = carRequestSchema.extend({
 const listCarByUserEschema = z.object({
   name: z.string().max(50),
   description: z.string(),
-  cars: carSchema.array(),
+  cars: carListSchema.array(),
 });
 
 const listCarEschema = z.array(carSchema);
