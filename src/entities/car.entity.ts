@@ -9,7 +9,7 @@ import {
 } from "typeorm";
 import { Images } from './carImages.entity'
 import { User } from "./user.entity";
-import { CarComment } from "./comment.entity";
+import { CarComment } from "./comments.entity";
 
 enum Fuels {
   DIESEL = "Diesel",
@@ -63,6 +63,7 @@ class Car {
 
   @OneToMany(() => CarComment, (comment) => comment.car)
   comments: CarComment[]
+  
   @CreateDateColumn({ type: "date" })
   createdAt!: string;
   userCreat: any;

@@ -13,7 +13,7 @@ import {
 import { Address } from "./address.entity";
 import { getRounds, hashSync } from "bcryptjs";
 import { Car } from "./car.entity";
-import { CarComment } from "./comment.entity";
+import { CarComment } from "./comments.entity";
 
 @Entity("user")
 export class User {
