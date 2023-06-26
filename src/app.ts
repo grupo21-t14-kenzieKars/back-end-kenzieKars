@@ -5,6 +5,7 @@ import handleError from "./errors/handleError";
 import carRouter from "./routes/car.routes";
 import userRouter from "./routes/user.routes";
 import loginRouter from "./routes/login.routes";
+import commentRouter from "./routes/comment.routes";
 
 const app: Application = express();
 app.use(cors());
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use("/car", carRouter);
 app.use("/user", userRouter);
 app.use("/login", loginRouter);
+app.use("/comment", commentRouter)
 
 app.use(handleError);
 

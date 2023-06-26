@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Car } from "./car.entity";
 import { User } from "./user.entity";
 
@@ -9,7 +9,7 @@ export class CarComment {
     id: string;
 
     @Column({ type: 'text' })
-    text: string
+    content: string
 
     @CreateDateColumn()
     createdAt: Date;
@@ -18,8 +18,10 @@ export class CarComment {
     updatedAt: Date;
 
     @ManyToOne(() => Car, (car) => car.comments)
+    @JoinColumn()
     car: Car;
 
     @ManyToOne(() => User, (user) => user.comments)
+    @JoinColumn()
     user: User;
 }

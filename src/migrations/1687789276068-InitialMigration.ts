@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Comments1687532102319 implements MigrationInterface {
-    name = 'Comments1687532102319'
+export class InitialMigration1687789276068 implements MigrationInterface {
+    name = 'InitialMigration1687789276068'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "images" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "one" character varying NOT NULL, "two" text, "three" text, "four" text, "five" text, "six" text, "carId" uuid, CONSTRAINT "REL_c966d343d95687961368797192" UNIQUE ("carId"), CONSTRAINT "PK_1fe148074c6a1a91b63cb9ee3c9" PRIMARY KEY ("id"))`);
-        await queryRunner.query(`CREATE TABLE "carComments" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "text" text NOT NULL, "carId" uuid, "userId" uuid, CONSTRAINT "PK_a1fe1ea25b2ef363a5aafbb293d" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "carComments" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "content" text NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "carId" uuid, "userId" uuid, CONSTRAINT "PK_a1fe1ea25b2ef363a5aafbb293d" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TYPE "public"."cars_fuel_type_enum" AS ENUM('Diesel', 'Etanol', 'Gasolina', 'Flex')`);
         await queryRunner.query(`CREATE TABLE "cars" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "brand" character varying(50) NOT NULL, "model" character varying(50) NOT NULL, "year" character varying(4) NOT NULL, "fuel_type" "public"."cars_fuel_type_enum" NOT NULL, "color" character varying(50) NOT NULL, "kilometers" integer NOT NULL, "fipe_price" double precision NOT NULL, "price" double precision NOT NULL, "description" text NOT NULL, "createdAt" date NOT NULL DEFAULT now(), "userId" uuid, CONSTRAINT "PK_fc218aa84e79b477d55322271b6" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "user" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "email" character varying(50) NOT NULL, "name" character varying(127) NOT NULL, "cpf" character varying(11) NOT NULL, "phone" character varying(13) NOT NULL, "birth_date" date NOT NULL, "description" character varying NOT NULL, "password" character varying(127) NOT NULL, "is_seller" boolean NOT NULL DEFAULT false, "reset_token" text, "reset_token_date" TIMESTAMP WITH TIME ZONE, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "deletedAt" TIMESTAMP, CONSTRAINT "UQ_e12875dfb3b1d92d7d7c5377e22" UNIQUE ("email"), CONSTRAINT "UQ_a6235b5ef0939d8deaad755fc87" UNIQUE ("cpf"), CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id"))`);
