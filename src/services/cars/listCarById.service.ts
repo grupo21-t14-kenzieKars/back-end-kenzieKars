@@ -9,6 +9,7 @@ const listCarByIdService = async (id: string): Promise<any> => {
   const car = await carRepository.findOne({
     where: { id: id },
     relations: {
+      user: true,
       images: true,
       comments: {
         user: true
