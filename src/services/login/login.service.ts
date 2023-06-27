@@ -13,7 +13,7 @@ const loginService = async ({ email, password }: ILogin) => {
   });
 
   if (!user) {
-    throw new AppError("user not found", 200);
+    throw new AppError("Email or passsword invalid", 404);
   }
 
   const pass = await compare(password, user.password);
