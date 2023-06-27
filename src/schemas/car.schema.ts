@@ -27,7 +27,8 @@ const carRequestSchema = z.object({
 
 const CarOwner = z.object({
   name: z.string(),
-  id: z.string()
+  id: z.string(),
+  description: z.string()
 })
 
 const carComments = carCommentReturnSchema.extend({
@@ -36,6 +37,7 @@ const carComments = carCommentReturnSchema.extend({
 
 const carSchema = carRequestSchema.extend({
   id: z.string(),
+  user: CarOwner,
   updatedAt: z.string().nullish(),
   createdAt: z.string().nullish(),
 });
