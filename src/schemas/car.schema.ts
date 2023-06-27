@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { Fuels } from "../entities/car.entity";
 import { UserReturnSchema } from "./user.schema";
 import { carCommentReturnSchema } from "./comments.schema";
 
@@ -16,7 +15,7 @@ const carRequestSchema = z.object({
   brand: z.string(),
   model: z.string(),
   year: z.string(),
-  fuel_type: z.nativeEnum(Fuels),
+  fuel_type: z.string(),
   color: z.string(),
   kilometers: z.number(),
   fipe_price: z.number(),
@@ -45,8 +44,6 @@ const carSchema = carRequestSchema.extend({
 const carWithComments = carSchema.extend({
   comments: z.array(carComments)
 })
-
-
 
 const carListSchema = carRequestSchema.extend({
   id: z.string(),
