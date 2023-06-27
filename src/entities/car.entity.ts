@@ -11,13 +11,6 @@ import { Images } from './carImages.entity'
 import { User } from "./user.entity";
 import { CarComment } from "./comments.entity";
 
-enum Fuels {
-  DIESEL = "Diesel",
-  ETANOL = "Etanol",
-  GASOLINE = "Gasolina",
-  FLEX = "Flex",
-}
-
 @Entity("cars")
 class Car {
   @PrimaryGeneratedColumn("uuid")
@@ -32,11 +25,8 @@ class Car {
   @Column({ length: 4 })
   year: string;
 
-  @Column({
-    type: "enum",
-    enum: Fuels,
-  })
-  fuel_type: Fuels;
+  @Column()
+  fuel_type: string;
 
   @Column({ length: 50 })
   color: string;
@@ -69,4 +59,4 @@ class Car {
   userCreat: any;
 }
 
-export { Car, Fuels };
+export { Car };
