@@ -1,6 +1,4 @@
 import { z } from "zod";
-import { UserReturnSchema } from "./user.schema";
-import { carCommentReturnSchema } from "./comments.schema";
 
 const imagesSchema = z.object({
   one: z.string(),
@@ -27,24 +25,20 @@ const carRequestSchema = z.object({
 const CarOwner = z.object({
   name: z.string(),
   id: z.string(),
-  description: z.string()
-})
+  description: z.string(),
+});
 
-const carComments = carCommentReturnSchema.extend({
-  user: z.string()
-})
 
-const carSchema = carRequestSchema.extend({
+const carCreateReturnSchema = carRequestSchema.extend({
   id: z.string(),
   updatedAt: z.string().nullish(),
   createdAt: z.string().nullish(),
+  user: z.object({
+    id: z.string(),
+  }),
 });
 
-const carWithComments = carSchema.extend({
-  comments: z.array(carComments)
-})
-
-const carListSchema = carRequestSchema.extend({
+const carSchema = carRequestSchema.extend({
   id: z.string(),
   updatedAt: z.string().nullish(),
   createdAt: z.string().nullish(),
@@ -52,12 +46,34 @@ const carListSchema = carRequestSchema.extend({
   comments: z.array(carComments).optional()
 });
 
+
 const listCarByUserEschema = z.object({
   name: z.string().max(50),
   description: z.string(),
-  cars: carListSchema.array(),
+  cars: carSchema.array(),
 });
 
-const listCarEschema = carListSchema.array();
+const listCarEschema = z.array(carSchema);
 
-export { carRequestSchema, carSchema, listCarEschema, listCarByUserEschema };
+// const carComments = carCommentReturnSchema.extend({
+//   user: z.string(),
+// });
+
+// const carWithComments = carSchema.extend({
+  //   comments: z.array(carComments),
+  // }); pra que serve?
+  
+  // const carListSchema = carRequestSchema.extend({
+  //   id: z.string(),
+  //   updatedAt: z.string().nullish(),
+  //   createdAt: z.string().nullish(),
+  //   user: CarOwner,
+  // });
+
+export {
+  carRequestSchema,
+  carSchema,
+  listCarEschema,
+  listCarByUserEschema,
+  carCreateReturnSchema,
+};

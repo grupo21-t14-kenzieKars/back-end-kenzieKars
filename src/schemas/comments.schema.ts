@@ -12,6 +12,10 @@ export const carCommentReturnSchema = carCommentSchema.extend({
 })
 
 export const carCommentsWithUserSchema = carCommentReturnSchema.extend({
+    // user: z.object({
+    //     id: z.string(),
+    //     name: z.string(),
+    // })
     user: UserReturnSchema.omit({
         email: true,
         cpf: true,
