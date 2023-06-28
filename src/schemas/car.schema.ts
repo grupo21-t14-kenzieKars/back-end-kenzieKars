@@ -36,7 +36,6 @@ const carComments = carCommentReturnSchema.extend({
 
 const carSchema = carRequestSchema.extend({
   id: z.string(),
-  user: CarOwner,
   updatedAt: z.string().nullish(),
   createdAt: z.string().nullish(),
 });
@@ -50,6 +49,7 @@ const carListSchema = carRequestSchema.extend({
   updatedAt: z.string().nullish(),
   createdAt: z.string().nullish(),
   user: CarOwner,
+  comments: z.array(carComments).optional()
 });
 
 const listCarByUserEschema = z.object({
@@ -58,6 +58,6 @@ const listCarByUserEschema = z.object({
   cars: carListSchema.array(),
 });
 
-const listCarEschema = z.array(carListSchema);
+const listCarEschema = carListSchema.array();
 
 export { carRequestSchema, carSchema, listCarEschema, listCarByUserEschema };
