@@ -1,7 +1,7 @@
 import AppDataSource from "../../data-source";
 import { User } from "../../entities";
 import { ICArByUser } from "../../interfaces/cars/car.interface";
-import { listCarByUserEschema } from "../../schemas/car.schema";
+import { listCarEschema } from "../../schemas/car.schema";
 
 const listCarByUserService = async (userId: string): Promise<ICArByUser> => {
   const userRepository = AppDataSource.getRepository(User);
@@ -15,7 +15,7 @@ const listCarByUserService = async (userId: string): Promise<ICArByUser> => {
     },
   });
 
-  const validatedCars: ICArByUser = listCarByUserEschema.parse(cars);
+  const validatedCars: ICArByUser = listCarEschema.parse(cars);
 
   return validatedCars;
 };

@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { Fuels } from "../entities/car.entity";
-import { UserReturnSchema } from "./user.schema";
 import { carCommentReturnSchema } from "./comments.schema";
 
 const imagesSchema = z.object({
@@ -42,25 +41,6 @@ const carSchema = carRequestSchema.extend({
   createdAt: z.string().nullish(),
 });
 
-const carWithComments = carSchema.extend({
-  comments: z.array(carComments)
-})
+const listCarEschema = z.array(carSchema);
 
-
-
-const carListSchema = carRequestSchema.extend({
-  id: z.string(),
-  updatedAt: z.string().nullish(),
-  createdAt: z.string().nullish(),
-  user: CarOwner,
-});
-
-const listCarByUserEschema = z.object({
-  name: z.string().max(50),
-  description: z.string(),
-  cars: carListSchema.array(),
-});
-
-const listCarEschema = z.array(carListSchema);
-
-export { carRequestSchema, carSchema, listCarEschema, listCarByUserEschema };
+export { carRequestSchema, carSchema, listCarEschema };
