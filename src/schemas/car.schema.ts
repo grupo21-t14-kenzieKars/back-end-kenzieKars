@@ -1,6 +1,4 @@
 import { z } from "zod";
-import { Fuels } from "../entities/car.entity";
-import { carCommentReturnSchema } from "./comments.schema";
 
 const imagesSchema = z.object({
   one: z.string(),
@@ -15,7 +13,7 @@ const carRequestSchema = z.object({
   brand: z.string(),
   model: z.string(),
   year: z.string(),
-  fuel_type: z.nativeEnum(Fuels),
+  fuel_type: z.string(),
   color: z.string(),
   kilometers: z.number(),
   fipe_price: z.number(),
@@ -27,20 +25,54 @@ const carRequestSchema = z.object({
 const CarOwner = z.object({
   name: z.string(),
   id: z.string(),
-  description: z.string()
-})
+  description: z.string(),
+});
 
-const carComments = carCommentReturnSchema.extend({
-  user: z.string()
-})
+
+const carCreateReturnSchema = carRequestSchema.extend({
+  id: z.string(),
+  updatedAt: z.string().nullish(),
+  createdAt: z.string().nullish(),
+  user: z.object({
+    id: z.string(),
+  }),
+});
 
 const carSchema = carRequestSchema.extend({
   id: z.string(),
-  user: CarOwner,
   updatedAt: z.string().nullish(),
   createdAt: z.string().nullish(),
+  user: CarOwner,
+});
+
+
+const listCarByUserEschema = z.object({
+  name: z.string().max(50),
+  description: z.string(),
+  cars: carSchema.array(),
 });
 
 const listCarEschema = z.array(carSchema);
 
-export { carRequestSchema, carSchema, listCarEschema };
+// const carComments = carCommentReturnSchema.extend({
+//   user: z.string(),
+// });
+
+// const carWithComments = carSchema.extend({
+  //   comments: z.array(carComments),
+  // }); pra que serve?
+  
+  // const carListSchema = carRequestSchema.extend({
+  //   id: z.string(),
+  //   updatedAt: z.string().nullish(),
+  //   createdAt: z.string().nullish(),
+  //   user: CarOwner,
+  // });
+
+export {
+  carRequestSchema,
+  carSchema,
+  listCarEschema,
+  listCarByUserEschema,
+  carCreateReturnSchema,
+};

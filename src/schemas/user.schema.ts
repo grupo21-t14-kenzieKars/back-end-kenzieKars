@@ -25,6 +25,18 @@ const UserSchema = z.object({
   deletedAt: z.date().nullable(),
 });
 
+const UserRequestSchema = z.object({
+  email: z.string().email(),
+  name: z.string().max(50),
+  cpf: z.string().length(11),
+  phone: z.string().length(13),
+  birth_date: z.string(),
+  description: z.string(),
+  password: z.string(),
+  is_seller: z.boolean(),
+  address: CreatedAddressSchema,
+})
+
 const AddressReturnSchema = z.object({
   id: z.string().uuid(),
   zip_code: z.string().length(8),
@@ -39,17 +51,6 @@ const UserReturnSchema = UserSchema.omit({
   password: true
 })
 
-const UserRequestSchema = z.object({
-  email: z.string().email(),
-  name: z.string().max(50),
-  cpf: z.string().length(11),
-  phone: z.string().length(13),
-  birth_date: z.string(),
-  description: z.string(),
-  password: z.string(),
-  is_seller: z.boolean(),
-  address: CreatedAddressSchema,
-})
 
 const UserUpdateSchema = UserRequestSchema.omit({
   is_seller: true
@@ -73,4 +74,6 @@ const RecoveryPasswordSchema = z.object({
   password: z.string()
 })
 
-export { UserReturnSchema, AddressReturnSchema, UserRequestSchema, UserUpdateSchema, RecoveryPasswordSchema, SendEmailSchema };
+const listAllUserSchemas = z.array(UserReturnSchema)
+
+export { UserReturnSchema, AddressReturnSchema, UserRequestSchema, UserUpdateSchema, RecoveryPasswordSchema, SendEmailSchema,listAllUserSchemas};
