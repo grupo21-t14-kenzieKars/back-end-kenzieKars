@@ -43,7 +43,6 @@ const carSchema = carRequestSchema.extend({
   updatedAt: z.string().nullish(),
   createdAt: z.string().nullish(),
   user: CarOwner,
-  comments: z.array(carComments).optional()
 });
 
 
