@@ -38,6 +38,7 @@ carRouter.get("/seller/:id", listCarByUserContrller);
 
 carRouter.patch(
   "/:id",
+  ensureauthMiddleware,
   ensureUuidIsValidMiddleware,
   ensurePosterCarExistsMiddleware,
   ensureCarPosterOwnerMiddleware,
