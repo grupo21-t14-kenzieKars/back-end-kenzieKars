@@ -10,7 +10,6 @@ import { User } from "../../entities";
 const createUserService = async (data: IUserRequest): Promise<IUserReturn> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-
   const user = userRepository.create(data);
 
   await userRepository.save(user);
