@@ -29,7 +29,6 @@ carRouter.post(
 carRouter.get("", listCarsController);
 carRouter.get(
   "/:id",
-  ensureAuthTokenMiddleware,
   ensureUuidIsValidMiddleware,
   ensurePosterCarExistsMiddleware,
   listCarByIdController
