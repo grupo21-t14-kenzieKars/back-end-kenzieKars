@@ -19,6 +19,7 @@ const carRequestSchema = z.object({
   fipe_price: z.number(),
   price: z.number(),
   description: z.string(),
+  is_active: z.boolean().default(true).optional(),
   images: imagesSchema,
 });
 
