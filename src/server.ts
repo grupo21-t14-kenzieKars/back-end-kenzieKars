@@ -6,7 +6,7 @@ AppDataSource.initialize()
   .then(async () => {
     console.log("Database is connected");
     app.listen(3000, () => {
-      console.log(`Server is running on 3000`);
+      console.log(`Server is running`);
     });
   })
   .catch((error) => console.log(error));
