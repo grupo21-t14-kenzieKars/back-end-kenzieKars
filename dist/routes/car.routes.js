@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const cars_1 = require("../controllers/cars");
+const middlewares_1 = require("../middlewares");
+const car_schema_1 = require("../schemas/car.schema");
+const ensureAuthMiddleware_1 = __importDefault(require("./../middlewares/ensureAuthMiddleware"));
+const listCarsByUser_controller_1 = __importDefault(require("../controllers/cars/listCarsByUser.controller"));
+const ensureIsOwnerPostMiddleware_1 = __importDefault(require("./../middlewares/ensureIsOwnerPostMiddleware"));
+const carRouter = (0, express_1.Router)();
+carRouter.post("", ensureAuthMiddleware_1.default, (0, middlewares_1.verifySchemaMiddleware)(car_schema_1.carRequestSchema), cars_1.createCarController);
+carRouter.get("", cars_1.listCarsController);
+carRouter.get("/:id", middlewares_1.ensureUuidIsValidMiddleware, middlewares_1.ensurePosterCarExistsMiddleware, cars_1.listCarByIdController);
+carRouter.get("/seller/:id", listCarsByUser_controller_1.default);
+carRouter.patch("/:id", ensureAuthMiddleware_1.default, middlewares_1.ensureUuidIsValidMiddleware, middlewares_1.ensurePosterCarExistsMiddleware, ensureIsOwnerPostMiddleware_1.default, cars_1.uptadeCarController);
+carRouter.delete("/:id", ensureAuthMiddleware_1.default, middlewares_1.ensureUuidIsValidMiddleware, middlewares_1.ensurePosterCarExistsMiddleware, ensureIsOwnerPostMiddleware_1.default, cars_1.deleteCarController);
+exports.default = carRouter;
