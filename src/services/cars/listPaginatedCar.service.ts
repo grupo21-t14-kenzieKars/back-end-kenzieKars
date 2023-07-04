@@ -8,6 +8,9 @@ const listPaginatedCarsService = async (page: number = 1, perpage: number = 9): 
   const carRepository: Repository<Car> = DataSourceConfig.getRepository(Car);
 
   const findCars = await carRepository.find({
+    where: {
+      is_active:true
+    },
     relations: {
       images: true,
       user: true
