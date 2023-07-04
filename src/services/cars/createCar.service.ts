@@ -1,7 +1,6 @@
 import AppDataSource from "../../data-source";
 import { Car } from "../../entities";
 import {
-  ICar,
   ICarRequest,
   ICarReturnCreate,
 } from "../../interfaces/cars/car.interface";
