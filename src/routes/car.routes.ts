@@ -29,7 +29,7 @@ carRouter.post(
 );
 
 carRouter.get("", listCarsController);
-carRouter.get("/paging", listPaginatedCarsController)
+carRouter.get("/paginated", listPaginatedCarsController)
 carRouter.get(
   "/:id",
   ensureUuidIsValidMiddleware,

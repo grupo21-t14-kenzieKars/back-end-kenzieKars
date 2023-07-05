@@ -26,12 +26,12 @@ const listPaginatedCarsService = async (page: number = 1, perpage: number = 9): 
 
   let nextPage: string | null = null
   if(endPage < totalCount){
-    nextPage = `http://localhost:3000/car/paging?page=${page + 1}&perpage=${perpage}`
+    nextPage = `http://localhost:3000/car/paginated?page=${page + 1}&perpage=${perpage}`
   }
 
   let prevPage: string | null = null
   if(page> 1){
-    prevPage = `http://localhost:3000/car/paging?page=${page - 1}&perpage=${perpage}`
+    prevPage = `http://localhost:3000/car/paginated?page=${page - 1}&perpage=${perpage}`
   }
   
   const result: ICarPagination = {
