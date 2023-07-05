@@ -27,6 +27,7 @@ const CarOwner = z.object({
   name: z.string(),
   id: z.string(),
   description: z.string(),
+  phone: z.string()
 });
 
 
@@ -62,15 +63,15 @@ const listCarEschema = z.array(carSchema);
 // });
 
 // const carWithComments = carSchema.extend({
-  //   comments: z.array(carComments),
-  // }); pra que serve?
-  
-  // const carListSchema = carRequestSchema.extend({
-  //   id: z.string(),
-  //   updatedAt: z.string().nullish(),
-  //   createdAt: z.string().nullish(),
-  //   user: CarOwner,
-  // });
+//   comments: z.array(carComments),
+// }); pra que serve?
+
+// const carListSchema = carRequestSchema.extend({
+//   id: z.string(),
+//   updatedAt: z.string().nullish(),
+//   createdAt: z.string().nullish(),
+//   user: CarOwner,
+// });
 
 export {
   carRequestSchema,
