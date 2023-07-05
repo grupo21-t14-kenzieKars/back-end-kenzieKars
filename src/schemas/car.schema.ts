@@ -19,6 +19,7 @@ const carRequestSchema = z.object({
   fipe_price: z.number(),
   price: z.number(),
   description: z.string(),
+  is_active: z.boolean().optional().default(true),
   images: imagesSchema,
 });
 
@@ -52,6 +53,8 @@ const listCarByUserEschema = z.object({
   cars: carSchema.array(),
 });
 
+const updateCarSchema = carRequestSchema.partial()
+
 const listCarEschema = z.array(carSchema);
 
 // const carComments = carCommentReturnSchema.extend({
@@ -75,4 +78,5 @@ export {
   listCarEschema,
   listCarByUserEschema,
   carCreateReturnSchema,
+  updateCarSchema
 };

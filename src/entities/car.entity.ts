@@ -43,6 +43,9 @@ class Car {
   @Column({ type: "text" })
   description: string;
 
+  @Column({default: true})
+  is_active: boolean;
+
   @ManyToOne(() => User, (user) => user.cars, { onDelete: "CASCADE" })
   user: User;
 

@@ -16,6 +16,8 @@ import ensureAuthTokenMiddleware from "./../middlewares/ensureAuthMiddleware";
 import ensureauthMiddleware from "./../middlewares/ensureAuthMiddleware";
 import listCarByUserContrller from "../controllers/cars/listCarsByUser.controller";
 import ensureCarPosterOwnerMiddleware from './../middlewares/ensureIsOwnerPostMiddleware';
+import listPaginatedCarsService from "../services/cars/listPaginatedCar.service";
+import listPaginatedCarsController from "../controllers/cars/listPaginatedCars.controller";
 
 const carRouter = Router();
 
@@ -27,6 +29,7 @@ carRouter.post(
 );
 
 carRouter.get("", listCarsController);
+carRouter.get("/paginated", listPaginatedCarsController)
 carRouter.get(
   "/:id",
   ensureUuidIsValidMiddleware,
