@@ -9,13 +9,13 @@ Possui funcionalidades como:
 
 ## Tabela de Conteúdos
 
-- [Linguagens e Tecnologias](#1-Linguagens-e-Tecnologias)
+- [Linguagens e Tecnologias](#1-linguagens-e-tecnologias)
 - [Diagrama ER](#2-diagrama-er)
 - [Início Rápido](#3-início-rápido)
     - [Instalação de dependências](#31-instalando-dependências)
     - [Ativando o ambiente virtual](#32-variáveis-de-ambiente)
     - [Instalar as dependências](#33-migrations)
-    - [Variáveis de Ambiente](#34-rodar-o-servidor)
+    - [Variáveis de Ambiente](#34-rodando-o-servidor)
 - [Estrutura da API](#4-estrutura-da-api)
 
 ---
@@ -117,3 +117,7 @@ ou
 ```
 npm run dev
 ```
+
+## 4. Estrutura da API
+
+- [Documentação](https://api-docs-plum.vercel.app)
